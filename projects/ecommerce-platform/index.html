@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Platform - Amddah</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .product-card:hover {
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+        }
+        .cart-item {
+            animation: slideIn 0.3s ease;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Header -->
+    <header class="bg-white shadow-lg">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-shopping-cart text-blue-600 text-2xl"></i>
+                    <h1 class="text-2xl font-bold text-gray-800">ShopMart</h1>
+                </div>
+                <nav class="hidden md:flex space-x-6">
+                    <a href="#home" class="text-gray-600 hover:text-blue-600">Home</a>
+                    <a href="#products" class="text-gray-600 hover:text-blue-600">Products</a>
+                    <a href="#about" class="text-gray-600 hover:text-blue-600">About</a>
+                    <a href="#contact" class="text-gray-600 hover:text-blue-600">Contact</a>
+                </nav>
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <button id="cartBtn" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                            <i class="fas fa-shopping-cart"></i>
+                            Cart (<span id="cartCount">0</span>)
+                        </button>
+                    </div>
+                    <button class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300">
+                        <i class="fas fa-user"></i> Login
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-5xl font-bold mb-4">Welcome to ShopMart</h2>
+            <p class="text-xl mb-8">Discover amazing products at unbeatable prices</p>
+            <button class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100">
+                Shop Now
+            </button>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="py-16">
+        <div class="container mx-auto px-4">
+            <h3 class="text-3xl font-bold text-center mb-12">Featured Products</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Product 1 -->
+                <div class="product-card bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="h-48 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
+                        <i class="fas fa-laptop text-white text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-semibold mb-2">MacBook Pro</h4>
+                        <p class="text-gray-600 mb-4">Powerful laptop for professionals</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-green-600">$1,999</span>
+                            <button onclick="addToCart('MacBook Pro', 1999)" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="h-48 bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
+                        <i class="fas fa-mobile-alt text-white text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-semibold mb-2">iPhone 15</h4>
+                        <p class="text-gray-600 mb-4">Latest smartphone with advanced features</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-green-600">$999</span>
+                            <button onclick="addToCart('iPhone 15', 999)" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="h-48 bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
+                        <i class="fas fa-headphones text-white text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-semibold mb-2">Wireless Headphones</h4>
+                        <p class="text-gray-600 mb-4">Premium sound quality</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-green-600">$299</span>
+                            <button onclick="addToCart('Wireless Headphones', 299)" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-lg max-w-md w-full max-h-96 overflow-y-auto">
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-semibold">Shopping Cart</h3>
+                        <button onclick="closeCart()" class="text-gray-500 hover:text-gray-700">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div id="cartItems" class="space-y-4">
+                        <!-- Cart items will be added here -->
+                    </div>
+                    <div class="border-t pt-4 mt-4">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-lg font-semibold">Total:</span>
+                            <span id="cartTotal" class="text-xl font-bold text-green-600">$0</span>
+                        </div>
+                        <button class="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700">
+                            Proceed to Checkout
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h4 class="text-xl font-semibold mb-4">ShopMart</h4>
+                    <p class="text-gray-300">Your trusted online shopping destination</p>
+                </div>
+                <div>
+                    <h4 class="text-xl font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-white">About Us</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Contact</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-xl font-semibold mb-4">Contact</h4>
+                    <p class="text-gray-300">Email: mohamed21amddah@gmail.com</p>
+                    <p class="text-gray-300">Phone: +212 658 742 744</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let cart = [];
+        let cartTotal = 0;
+
+        function addToCart(name, price) {
+            const existingItem = cart.find(item => item.name === name);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ name, price, quantity: 1 });
+            }
+            updateCartDisplay();
+            showNotification(`${name} added to cart!`);
+        }
+
+        function removeFromCart(name) {
+            cart = cart.filter(item => item.name !== name);
+            updateCartDisplay();
+        }
+
+        function updateQuantity(name, change) {
+            const item = cart.find(item => item.name === name);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    removeFromCart(name);
+                } else {
+                    updateCartDisplay();
+                }
+            }
+        }
+
+        function updateCartDisplay() {
+            const cartCount = document.getElementById('cartCount');
+            const cartItems = document.getElementById('cartItems');
+            const cartTotalElement = document.getElementById('cartTotal');
+            
+            cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+            
+            cartTotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            cartTotalElement.textContent = `$${cartTotal}`;
+            
+            cartItems.innerHTML = cart.map(item => `
+                <div class="cart-item flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                    <div>
+                        <h5 class="font-semibold">${item.name}</h5>
+                        <p class="text-gray-600">$${item.price}</p>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <button onclick="updateQuantity('${item.name}', -1)" class="bg-gray-200 px-2 py-1 rounded">-</button>
+                        <span class="px-3">${item.quantity}</span>
+                        <button onclick="updateQuantity('${item.name}', 1)" class="bg-gray-200 px-2 py-1 rounded">+</button>
+                        <button onclick="removeFromCart('${item.name}')" class="text-red-500 hover:text-red-700 ml-2">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function showCart() {
+            document.getElementById('cartModal').classList.remove('hidden');
+        }
+
+        function closeCart() {
+            document.getElementById('cartModal').classList.add('hidden');
+        }
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Event listeners
+        document.getElementById('cartBtn').addEventListener('click', showCart);
+    </script>
+</body>
+</html>
