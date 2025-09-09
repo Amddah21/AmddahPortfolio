@@ -15,7 +15,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="col-span-1 md:col-span-1">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-              Your Name
+              Amddah
             </h3>
             <p className="text-gray-600 dark:text-gray-400 text-sm">
               Full-stack developer passionate about creating amazing digital experiences.

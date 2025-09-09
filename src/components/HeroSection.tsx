@@ -71,7 +71,7 @@ export default function HeroSection() {
                 animate={{ color: ['#2563eb', '#7c3aed', '#2563eb'] }}
                 transition={{ duration: 3, repeat: Infinity }}
               >
-                Your Name
+                Amddah
               </motion.span>
             </h1>
             <p className="text-xl sm:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
